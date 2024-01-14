@@ -1,0 +1,98 @@
+/* imageUploader.css */
+
+/* Styles pour la mise en page générale */
+#image_uploader main {
+    background-color: white;
+    justify-content: space-around;
+    background-image: url();
+
+}
+
+#image_uploader h1 {
+    text-align: center;
+    margin-top: 3em;
+}
+
+#image_uploader form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#image_uploader input[type="file"] {
+    margin-top: 5em;
+}
+
+/* Styles pour le conteneur des images */
+#uploadedImage {
+    max-height: 50vh;
+    text-align: center;
+    margin-top: 2em;
+}
+#imgview #sidebyside{
+    display: flex;
+    flex-direction: row;
+    margin: 2em auto;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+#uploadedImage img {
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid #ccc;
+    object-fit: contain;
+}
+
+/* Styles pour le bouton de soumission */
+button[type="submit"],
+button[type="button"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 162px;
+    border: none;
+    cursor: pointer;
+    margin: 2em auto 10em auto;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    background-color: #45c045;
+}
+
+/* Styles pour les messages d'erreur et de succès */
+#error_message {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#success_message {
+    color: green;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Styles pour la mise en page générale */
+
+#cropResult img {
+    max-width: 300px;
+    max-height: 300px;
+}
+#croppedImage {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+#imgview{
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

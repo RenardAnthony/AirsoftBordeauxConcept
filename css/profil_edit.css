@@ -1,0 +1,185 @@
+main{
+    background-image: url(../assets/images/theme/bg-noir.png);
+
+}
+
+
+
+.input-text-base{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 0;
+    border-bottom: 1px solid var(--color-gray);
+    transition: 0s;
+    margin: 0;
+    text-align: center;
+    color: var(--color-black);
+}
+.input-text-base:focus {
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid var(--color-green);
+    color: var(--color-black);
+    transition: 0s;
+}
+
+textarea{
+    margin: 2em auto 0 auto;
+    display: flex;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
+    margin-bottom: 2rem;
+    padding: 1em;
+}
+
+#global_edition_box{
+    background-color: var(--color-white);
+    width: 75%;
+    margin: auto;
+    padding: 2em;
+
+}
+form#edit_form .partess{
+    width: 50%;
+    padding: 2rem;
+    margin: 1em;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px black;
+}
+
+.side_by_side{
+    display: flex;
+    flex-direction: row;
+}
+
+form#edit_form table{
+    margin: auto;
+}
+
+
+h2{
+    padding: 1em 0;
+    text-align: center;
+}
+.label{
+    text-align: right;
+}
+.midel-texte{
+    text-align: center;
+    margin: auto;
+}
+
+a.btn_mdp_new{
+    color: var(--color-black);
+    font-weight: bold;
+    transition: 0.7s;
+}
+a.btn_mdp_new:hover{
+    color: var(--color-green);
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.spacer{
+    height: 150px;
+}
+input[type="date"]{
+    width: 200px;
+}
+input[type="text"]{
+    width: 200px;
+}
+select{
+    width: 217px;
+}
+img#pdp_live{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    border: 3px solid transparent;
+    transition: 0.7s;
+}
+img#pdp_live:hover{
+    border: 3px solid var(--color-rougeBordeaux);
+    transition: 0.2s;
+}
+#bottom_edit_part{
+    text-align: center;
+}
+.spacing{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.gray-text{
+    color: rgb(138, 132, 132);
+}
+.red-text{
+    color: rgb(235, 38, 38);
+    font-weight: bold;
+}
+
+#submit{
+    text-align: center;
+    margin: 2em auto;
+}
+#submit input{
+    background-color: var(--color-green);
+    border: 0;
+    padding: 1em 4em;
+    border-radius: 50px;
+    font-size: 1em ;
+    color: white;
+    cursor: pointer;
+    transition: 0.7s;
+}
+#submit input:hover{
+    background-color: #45c045;
+    transition: 0.2s;
+}
+
+
+main#mdp_edition{
+    background-image: url();
+    text-align: center;
+    background-color: var(--color-gray);
+}
+
+main#mdp_edition h1{
+    padding: 2em 0;
+}
+main#mdp_edition form{
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    padding: 2em 0;
+    width: 800px;
+    margin: auto;
+}
+main#mdp_edition label{
+    margin-top: 2em;
+}
+
+main#mdp_edition table{
+    margin: auto;
+}
+main#mdp_edition button[type="submit"]{
+    background-color: #45c045;
+    padding: 1em 2em;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    margin: 2em 0 0 0;
+    box-shadow: 0 0 5px rgb(88, 88, 88);
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+main#mdp_edition button[type="submit"]:hover{
+    background-color: #55c755;
+    transition: 0.2s;
+}

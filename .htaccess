@@ -1,0 +1,20 @@
+RewriteEngine On
+
+# Gestion des erreurs
+ErrorDocument 404 /pages/erreur.php?code=404
+ErrorDocument 403 /pages/erreur.php?code=403
+ErrorDocument 500 /pages/erreur.php?code=500
+ErrorDocument 503 /pages/erreur.php?code=503
+
+# Réécriture des URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_-]+)$ /pages/$1.html [L]
+
+# Page par défaut
+DirectoryIndex /pages/index.php
+
+#je bloque l'accée au fichier config.php
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>

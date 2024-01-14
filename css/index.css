@@ -1,0 +1,156 @@
+#futur_game_box{
+    height: 80vh;
+    background-color: var(--color-gray);
+    margin: auto;
+}
+#futur_game_box #in_box{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#futur_game_box #in_box img{
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+    border-top: 5px solid var(--color-black);
+    border-left: 5px solid var(--color-black);
+    border-bottom: 5px solid var(--color-black);
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    cursor: default;
+}
+#futur_game_box #in_box #desc{
+    width: 500px;
+    height: 500px;
+    min-width: 500px;
+    min-height: 500px;
+    background-color: var(--color-black);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    cursor: default;
+
+    border-top: 5px solid var(--color-black);
+    border-right: 5px solid var(--color-black);
+    border-bottom: 5px solid var(--color-black);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+#futur_game_box #in_box h1#date{
+    font-size: 3em;
+    border-bottom: 5px solid var(--color-rougeBordeaux);
+}
+#futur_game_box #in_box p#desc-desc{
+    width: 70%;
+    font-size: 1.2em;
+    text-align: center;
+}
+#futur_game_box #in_box a p#btn{
+    background: var(--gradiant-red);
+    font-size: 1.2em;
+    padding: 0.75em 2em;
+    border-radius: var(--radius-50px);
+}
+#futur_game_box *{
+    color: var(--color-white);
+}
+
+
+
+#presentation_box{
+    background-color: white;
+    height: 80vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+}
+#presentation_box #presentation{
+    width: 80%;
+    margin: 0 auto;
+}
+#presentation_box #presentation h1{
+    margin: 2em 0;
+    font-size: 3em;
+}
+#presentation_box #presentation p{
+    text-align: center;
+    width: 70%;
+    margin: 0 auto 5em auto;
+}
+#presentation_box #presentation #chiffre_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+#presentation_box #presentation #chiffre_box h1.nbr{
+    margin: 0.2em 0;
+}
+#presentation_box #presentation #chiffre_box h1.nbr{
+    font-size: 4em;
+}
+
+
+
+#decouvert_box{
+    height: 80vh;
+    background-color: var(--color-gray);
+    margin: auto;
+
+    background-image: url(../assets/images/theme/PhotoGroupeFlou.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 75%;
+}
+#decouvert_box *{
+    color: var(--color-white);
+    text-shadow: 1px 1px 5px black;
+}
+#decouvert_box .in{
+    width: 80%;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.705);
+    height: 50%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+#forum{
+    background-color: var(--color-gray);
+    height: 80vh;
+    cursor: default;
+    margin: auto;
+}
+#forum #sidebyside{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#forum #sidebyside iframe{
+    width: 700px;
+    padding-right: 5em;
+}
+#forum #sidebyside #descs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5em;
+}

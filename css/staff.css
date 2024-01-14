@@ -1,0 +1,114 @@
+body{
+
+    --color-1: #F0F0F0;
+    --color-2: #213555;
+    --color-3: #4F709C;
+    --color-4: #E5D283;
+    --color-5: #121212;
+
+    --radius-1: 10px;
+
+    
+
+    min-height: 100vh;
+	margin: 0;
+    padding: 0;
+
+    background-color: white;
+    color: var(--color-5);
+}
+
+*{
+    color: var(--color-black);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    text-decoration: none;
+    object-fit: cover;
+}
+
+
+header{
+    height: 82px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    background-color: var(--color-3);
+    color: var(--color-1);
+}
+header h3{
+    margin: auto 5rem;
+    cursor: default;
+    font-size: 1.8rem;
+}
+header nav{
+    display: flex;
+    flex-direction: row;
+}
+header nav a{
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.7s;
+}
+header nav a:hover{
+    background: var(--color-2);
+    transition: 0.2s;
+}
+main{
+    min-height: 80vh;
+    margin: 3rem 10rem;
+}
+
+
+
+
+/* Cadre sécurité */
+.cadre_securite{
+    border: 1px dashed var(--color-3);
+    border-radius: var(--radius-1);
+    padding: 1.2rem;
+    background-color: var(--color-1);
+    cursor: default;
+}
+.cadre_securite h2{
+    margin-bottom: 0.5rem;
+    font-size: 1.1em;
+}
+
+
+
+/* Spacer */
+.spacer_1{
+    margin: 2.5rem 0;
+}
+
+
+
+/* Tableaux */
+.tableau table{
+    margin: auto;
+    width: 100%;
+    cursor: default;
+}
+.tableau  tr.titre td{
+    background-color: var(--color-3);
+    color: var(--color-1);
+}
+.tableau td{
+    background-color: var(--color-1);
+    padding: 0.5em;
+}
+.tableau th p{
+    font-size: 1.2em;
+    padding: 0.5em 0;
+    background-color: var(--color-2);
+    color: var(--color-1);
+}
+.tableau td.settings{
+    margin: auto;
+    text-align: center;
+}
+.tableau td.settings a img{
+    width: 18px;
+}

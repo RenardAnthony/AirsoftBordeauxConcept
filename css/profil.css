@@ -1,0 +1,143 @@
+main{
+    background-color: var(--color-gray);
+    padding: 5rem 0;
+}
+
+
+
+#part1{
+    display: flex;
+    flex-direction: row;
+    width: 1100px;
+    margin: auto;
+    background-color: var(--color-white);
+    cursor: default;
+}
+#part1 img{
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+}
+#part1 #part1-1{
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 600px;
+}
+#part1 #part1-1 h1{
+    margin-bottom: 1rem;
+}
+#part1 #part1-1 p{
+    margin-bottom: 0.2rem;
+    margin-left: 1em;
+}
+#part1 #role{
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#part1 #role img#badge{
+    width: 150px;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+}
+#part1 #role #liste_badge .badge_petit{
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+#part2{
+    display: flex;
+    flex-direction: column;
+    width: 1100px;
+    margin: 2rem auto;
+    background-color: var(--color-white);
+    cursor: default;
+}
+#part2 h2{
+    margin: 1rem 1rem 0 1rem;
+}
+#part2 p{
+    margin: 1rem 2rem;
+}
+
+
+
+#part3{
+    display: flex;
+    flex-direction: column;
+    width: 1100px;
+    margin: 2rem auto;
+    background-color: var(--color-white);
+    cursor: default;
+}
+#part3 h2{
+    margin: 1rem 1rem;
+}
+#part3 #liste_replique{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+#part3 #liste_replique .replique_unique img{
+    width: 250px;
+    height: 150px;
+}
+#part3 #liste_replique .replique_unique h2{
+    padding: 0.2em 0.5em;
+    margin: 0;
+    background-color: rgba(46, 46, 46, 0.37);
+    color: var(--color-black);
+
+    position: relative;
+    transform: translateY(-5px);
+}
+#part3 #liste_replique .replique_unique p{
+    text-align: center;
+    margin: 0.5em;
+    position: relative;
+    transform: translateY(-5px);
+}
+
+
+
+#part4{
+    display: flex;
+    flex-direction: column;
+    width: 1100px;
+    margin: 2rem auto;
+    background-color: var(--color-white);
+    cursor: default;
+    padding: 2rem 0;
+}
+#part4 table tr td h2{
+    font-size: 2rem;
+    text-align: center;
+    color: var(--color-black);
+}
+#part4 table tr td p{
+    font-size: 10rem;
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-black);
+}
+
+#part5{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 1100px;
+    margin: 2rem auto;
+    background-color: var(--color-white);
+    cursor: default;
+    padding: 1rem 0;
+}
