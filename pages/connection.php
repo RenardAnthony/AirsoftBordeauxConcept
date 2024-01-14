@@ -15,7 +15,7 @@ include_once '../config/session.php'; #Recuperer les information de mon utilisat
     <meta name="author" content="Votre nom ou le nom de votre association">
     <meta name="robots" content="index, follow">
     <meta http-equiv="Cache-control" content="public">
-    <title>Inscription | Airsoft Bordeaux Concept</title>
+    <title>Connection | Airsoft Bordeaux Concept</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/theme/favicon.png"/>
     
     <!-- Feuilles de style CSS et autres liens vers des ressources (si nécessaire) -->
