@@ -9,6 +9,7 @@ body{
 
     --gradiant-blue : linear-gradient(127deg, var(--color-blue) 0%, rgba(25,143,191,1) 100%);
     --gradiant-red : linear-gradient(300deg, var(--color-rougeBordeaux) 0%, #ED6A5A 100%);
+    --gradiant-grey : linear-gradient(300deg, var(--color-gray) 0%, #414141 100%);
 
     --radius-50 : 50%;
     --radius-50px : 50px;

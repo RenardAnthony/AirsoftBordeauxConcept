@@ -6,7 +6,7 @@
     <nav>
         <ul>
             <li><a href="../pages/calendrier.php">Calendrier</a></li>
-            <li><a href="">Forum</a></li>
+            <li><a href="https://airsoftbordeauxforum.forum-pro.fr">Forum</a></li>
             <li><a href="">Contact</a></li>
         </ul>
     </nav>

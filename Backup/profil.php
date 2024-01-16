@@ -1,9 +1,7 @@
 <?php
-session_start();
+include_once '../config/session.php'; #Recuperer les information de mon utilisateur connecter
 
-// Connexion à la base de données
-include '../config/db.php';
-$conn = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+
 
 // Vérifie si l'ID de l'utilisateur est passé dans l'URL
 if(isset($_GET['id'])){
@@ -20,6 +18,9 @@ if(isset($_GET['id'])){
         // Redirige vers l'accueil si l'utilisateur n'existe pas
         header("Location: ../pages/index.php"); 
     }
+
+    // Récupère les répliques de l'utilisateur dont tu consultes le profil
+    $replicas = getReplicas($conn, $getid);
 
 
 ?>
@@ -53,7 +54,7 @@ if(isset($_GET['id'])){
 
         <div id="part1">
             <!-- Affiche la photo de profil de l'utilisateur -->
-            <img src="../assets/images/avatars/<?=$userinfo['id']?>" alt="Photo de profil de <?=$userinfo['username']?>">
+            <img src="../assets/images/avatars/<?=$userinfo['avatar']?>" alt="Photo de profil de <?=$userinfo['username']?>">
 
 
             <div id="part1-1">
@@ -112,54 +113,19 @@ if(isset($_GET['id'])){
 
         <?php } ?>
 
-        <?php 
-        // Vérifie si l'armurerie de l'utilisateur n'est pas vide
-        if(!empty($userinfo['armurerie'])){?>
 
-            <div id="part3">
-                <h2>Réplique(s)</h2>
-                <div id="liste_replique">
-
-                <?php
-                // Récupère les ID des répliques de l'utilisateur dans un array
-                $repliques = $userinfo['armurerie'];
-                $replique = explode(",", $repliques);
-                $replique_count = count($replique); //Combien de répliques
-
-                // Connexion à la base de données pour récupérer les informations de chaque réplique
-                $dsn = "mysql:host=localhost;dbname=airsoftbordeaux;charset=utf8";
-                $db_username = "root";
-                $db_password = "0000";
-
-                try {
-                    $pdo = new PDO($dsn, $db_username, $db_password);
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                } catch (PDOException $e) {
-                    die("Erreur de connexion à la base de données : " . $e->getMessage());
-                }
-
-                // Boucle pour afficher chaque réplique de l'utilisateur
-                foreach($replique as $replique_value){
-                    
-                    $stmt = $pdo->prepare("SELECT * FROM replique WHERE id = :replique_id");
-                    $stmt->bindParam(':replique_id', $replique_value, PDO::PARAM_INT);
-                    $stmt->execute();
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    
-                    ?>
-
+        <div id="part3">
+            <h2>Réplique(s)</h2>
+            <div id="liste_replique">
+                <?php foreach($replicas as $replica): ?>
                     <div class="replique_unique">
-                        <!-- Affiche l'image, nom et caractéristiques de chaque réplique -->
-                        <img src="<?=$result['img']?>" alt="<?=$result['nom']?>">
-                        <h2><?=$result['nom']?></h2>
-                        <p><?=$result['fps']?> fps - <?=$result['type']?></p>
+                        <img src="<?=$replica['img']?>" alt="<?=$replica['nom']?>">
+                        <h2><?=$replica['nom']?></h2>
+                        <p><?=$replica['fps']?> fps - <?=$replica['type']?></p>
                     </div>
-
-                <?php } ?>
-
-                </div>
-                
-            <?php } ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
 
             </div>
 
@@ -169,8 +135,8 @@ if(isset($_GET['id'])){
             <table>
                 <!-- Affiche le nombre de messages et le nombre de parties jouées par l'utilisateur -->
                 <tr>
-                    <td><p>47</p></td>
-                    <td><p>21</p></td>
+                    <td><p>0</p></td>
+                    <td><p>0</p></td>
                 </tr>
                 <tr>
                     <td><h2>Nbr de messages</h2></td>
@@ -187,6 +153,9 @@ if(isset($_GET['id'])){
                 <!-- Affiche des liens pour éditer le profil et se déconnecter -->
                 <a href="../pages/profil_edit.php">Edit profil</a>
                 <a href="../php/traitement_deconnexion.php">Déconnexion</a>
+                <?php if($userinfo['role'] == 'administrateur' || $userinfo['role'] == 'moderateur' || $userinfo['role'] == 'comptable' || $userinfo['role'] == 'organisateur'){?>
+                    <a href="../pages/staff.php">Staff Zone</a>
+                <?php } ?>
             </div>
 
         <?php } ?>

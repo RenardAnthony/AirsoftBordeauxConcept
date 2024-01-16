@@ -49,4 +49,24 @@ function getReplicas($conn, $userId) {
 }
 
 
+
+
+function getLastPartie($conn) {
+    $sql_last_partie = "SELECT * FROM agenda WHERE date > NOW() ORDER BY date ASC LIMIT 1";
+    $stmt_last_partie = $conn->prepare($sql_last_partie);
+    $stmt_last_partie->execute();
+    return $stmt_last_partie->fetch(PDO::FETCH_ASSOC);
+}
+
+
+function getMembreAmount($conn) {
+    $sql = "SELECT COUNT(*) AS member_count FROM users";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return isset($result['member_count']) ? $result['member_count'] : 0;
+}
+
+
+
 ?>

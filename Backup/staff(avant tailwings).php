@@ -11,8 +11,12 @@ if($selfuser_role !== 'administrateur' && $selfuser_role !== 'moderateur' && $se
     exit();
 }
 
+include_once '../config/db.php'; # Inclure le fichier de configuration de la base de données
+// Connexion à la base de données
+$conn = connectDB();
+
 // Requête SQL pour récupérer les informations de tous les utilisateurs
-$query = "SELECT * FROM users ORDER BY date_inscription DESC LIMIT 8";
+$query = "SELECT * FROM users";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,14 +26,6 @@ $query = "SELECT * FROM agenda WHERE date > NOW() ORDER BY date ASC";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $agendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Requête SQL pour récupérer les répliques
-$query = "SELECT * FROM replique ORDER BY date_ajout DESC LIMIT 8";
-$stmt = $conn->prepare($query);
-$stmt->execute();
-$repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
 ?>
 
 
@@ -52,6 +48,7 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
     <main>
+        
         <div class="cadre_securite">
             <h2>Page Admin</h2>
             <p>Cette page contien des information confidentiel, Assurez-vous de ne pas montrer cette page à n'import qui.</p>
@@ -59,7 +56,7 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div class="spacer_1"></div>
 
-        <div class="table_style_1">
+        <div class="tableau">
             <table>
                 <thead>
                     <tr>
@@ -67,11 +64,11 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="colone_name">
+                    <tr class="titre">
                         <td><p>ID</p></td>
                         <td><p>Nom d'utilisateur</p></td>
                         <td><p>Nom</p></td>
-                        <td><p>Prénom</p></td>
+                        <td><p>Prenom</p></td>
                         <td><p>Genre</p></td>
                         <td><p>Groupe Sangin</p></td>
                         <td><p>Email</p></td>
@@ -103,29 +100,25 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><p><?=$user['ville']?></p></td>
                             <td><p><?=$user['date_naissance']?></p></td>
                             <td><p><?=$user['role']?></p></td>
-                            <td class="settings"><a href="">Edit</a></td>
+                            <td class="settings"><a href=""><img src="../assets/images/theme/gear.svg" alt=""></a></td>
                         </tr>
                     <?php endforeach; ?>
 
                 </tbody>
             </table>
-            <div class="double_button">
-                <a class="button_table_2" href="#">En voir plus</a>
-            </div>
         </div>
-
 
         <div class="spacer_1"></div>
 
-        <div class="table_style_1">
+        <div class="tableau">
             <table>
                 <thead>
                     <tr>
-                        <th colspan="8"><p>Parties d'airsoft</p></th>
+                        <th colspan="8"><p>Agenda</p></th>
                     </tr>
                 </thead>
-                <tr class="colone_name">
-                    <td><p>ID</p></td>
+                <tr class="titre">
+                    <td><p>Id</p></td>
                     <td><p>Titre</p></td>
                     <td><p>Description</p></td>
                     <td><p>Date</p></td>
@@ -144,63 +137,17 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <td><p><?=$agenda['joueur_min']?></p></td>
                         <td><p><?=$agenda['joueur_max']?></p></td>
                         <td><p><?=$agenda['terrain']?></p></td>
-                        <td class="settings"><a href="staff_creation_partie?id=<?=$agenda['id']?>">Edit</a></td>
+                        <td class="settings"><a href="creation_partie?id=<?=$agenda['id']?>"><img src="../assets/images/theme/gear.svg" alt="edit"></a></td>
                     </tr>
                 <?php endforeach; ?>
                 
             </table>
             <div class="double_button">
-                <a class="button_table" href="staff_supp_partie.php">Supprimer</a>
-                <a class="button_table" href="staff_creation_partie.php">Ajouter</a>
+                <a class="button_table" href="supp_partie.php">Supprimer</a>
+                <a class="button_table" href="creation_partie.php">Ajouter</a>
             </div>
         </div>
 
-        <div class="spacer_1"></div>
-
-    <div class="table_style_1">
-        <table>
-            <thead>
-                <tr>
-                    <th colspan="8"><p>Répliques</p></th>
-                </tr>
-            </thead>
-            <tr class="colone_name">
-                <td><p>ID</p></td>
-                <td><p>Propriétaire</p></td>
-                <td><p>Nom</p></td>
-                <td><p>Puissance</p></td>
-                <td><p>Type</p></td>
-                <td><p>Marque</p></td>
-                <td></td>
-            </tr>
-            <?php foreach($repliques as $replique):
-                
-                //ICI J'aimerai Afficher le pseudo du joueur qui a l'id correspondant à "proprio"
-                $queryUser = "SELECT username FROM users WHERE id = :proprio_id";
-                $stmtUser = $conn->prepare($queryUser);
-                $stmtUser->bindParam(':proprio_id', $replique["proprio"]);
-                $stmtUser->execute();
-                $userName22 = $stmtUser->fetch(PDO::FETCH_ASSOC);
-
-                // Vérifier si l'utilisateur est défini, sinon utiliser "unknown"
-                $userName22 = isset($userName22['username']) ? $userName22['username'] : '-';
-                            
-                ?>
-                <tr>
-                    <td><p><?=$replique["id"]?></p></td>
-                    <td><p><a href="profil.php?id=<?=$replique["proprio"]?>"><?=$userName22?></a></p></td>
-                    <td><p><?=$replique["nom"]?></p></td>
-                    <td><p><?=$replique["fps"]?> fps</p></td>
-                    <td><p><?=$replique["type"]?></p></td>
-                    <td><p><?=$replique["marque"]?></p></td>
-                    <td class="settings"><a href="<?=$replique['id']?>">Edit</a></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-        <div class="double_button">
-            <a class="button_table_2" href="#">Afficher plus</a>
-        </div>
-    </div>
 
     </main>
 

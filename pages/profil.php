@@ -153,6 +153,9 @@ if(isset($_GET['id'])){
                 <!-- Affiche des liens pour éditer le profil et se déconnecter -->
                 <a href="../pages/profil_edit.php">Edit profil</a>
                 <a href="../php/traitement_deconnexion.php">Déconnexion</a>
+                <?php if($userinfo['role'] == 'administrateur' || $userinfo['role'] == 'moderateur' || $userinfo['role'] == 'comptable' || $userinfo['role'] == 'organisateur'){?>
+                    <a href="../pages/staff.php">Staff Zone</a>
+                <?php } ?>
             </div>
 
         <?php } ?>

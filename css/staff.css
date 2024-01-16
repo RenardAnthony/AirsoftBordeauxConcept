@@ -1,3 +1,10 @@
+@font-face {
+	font-family: "lg-cafe";
+	src: url("font/Louis_George_Cafe.ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+
 body{
 
     --color-1: #F0F0F0;
@@ -5,10 +12,15 @@ body{
     --color-3: #4F709C;
     --color-4: #E5D283;
     --color-5: #121212;
+    --color-6: #202a3a;
+    --color-7: #5e7797;
+    --color-8: #e4e4e4;
+    --color-9: #acacac;
 
     --radius-1: 10px;
+    --radius-2: 5px;
 
-    
+    --boxshadow: 0px 0px 10px rgb(226, 226, 226);
 
     min-height: 100vh;
 	margin: 0;
@@ -20,7 +32,7 @@ body{
 
 *{
     color: var(--color-black);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "lg-cafe", system-ui, sans-serif, Arial, Helvetica, sans-serif;
     margin: 0;
     text-decoration: none;
     object-fit: cover;
@@ -28,33 +40,48 @@ body{
 
 
 header{
-    height: 82px;
+    background-color: var(--color-6);
+    height: 80px;
+    padding-left: 8rem;
     display: flex;
-    flex-direction: row;
-    text-align: center;
-    background-color: var(--color-3);
-    color: var(--color-1);
+    align-items: center;
 }
 header h3{
-    margin: auto 5rem;
-    cursor: default;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    margin: auto 2rem;
+    color: white;
 }
 header nav{
     display: flex;
     flex-direction: row;
-}
-header nav a{
-    width: 150px;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    transition: 0.7s;
 }
-header nav a:hover{
-    background: var(--color-2);
-    transition: 0.2s;
+header nav .nav-btn{
+    background-color: var(--color-6);
+    width: 126px;
+    text-align: center;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto 1rem;
+    color: var(--color-1);
+    padding: 0.3em 0 0.4em 0;
+    border-radius: var(--radius-2);
+    transition: 0.3s;
 }
+header nav .nav-btn:hover{
+    background-color: var(--color-7);
+    transition: 0.1s;
+    color: white;
+}
+
+body{
+    background-image: url(../assets/images/theme/adminbg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 main{
     min-height: 80vh;
     margin: 3rem 10rem;
@@ -65,10 +92,11 @@ main{
 
 /* Cadre sécurité */
 .cadre_securite{
-    border: 1px dashed var(--color-3);
-    border-radius: var(--radius-1);
+    border: 1px solid var(--color-8);
+    border-radius: var(--radius-2);
     padding: 1.2rem;
-    background-color: var(--color-1);
+    background-color: white;
+    box-shadow: var(--boxshadow);
     cursor: default;
 }
 .cadre_securite h2{
@@ -85,30 +113,100 @@ main{
 
 
 
-/* Tableaux */
-.tableau table{
-    margin: auto;
+.table_style_1{
+    border: 1px solid var(--color-8);
+    border-radius: var(--radius-2);
+    padding: 1rem;
+    background-color: white;
+    box-shadow: var(--boxshadow);
+}
+.table_style_1 table{
     width: 100%;
+    border-collapse: collapse;
+}
+.table_style_1 thead tr th{
+    text-align: left;
+    padding: 0.5em 0 1em 0.5em;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.table_style_1 td{
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-8);
     cursor: default;
 }
-.tableau  tr.titre td{
-    background-color: var(--color-3);
-    color: var(--color-1);
+.table_style_1 tr{
+    background-color: white;
+    transition: 0.3s;
 }
-.tableau td{
-    background-color: var(--color-1);
-    padding: 0.5em;
+.table_style_1 tr:hover{
+    background-color: var(--color-8);
+    transition: 0.1s;
 }
-.tableau th p{
-    font-size: 1.2em;
-    padding: 0.5em 0;
-    background-color: var(--color-2);
-    color: var(--color-1);
+.table_style_1 .colone_name{
+    font-weight: bold;
 }
-.tableau td.settings{
-    margin: auto;
+.table_style_1 .settings img{
+    width: 20px;
+}
+.table_style_1 .settings a{
+    color: var(--color-3);
+    font-weight: bold;
+    transition: 0.5s;
+}
+.table_style_1 .settings a:hover{
+    color: var(--color-2);
+    transition: 0.1s;
+}
+
+
+.button_table{
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     text-align: center;
+    padding: 0 0 0.2em 0;
+    margin: 0 2em;
+    border-radius: var(--radius-2);
+    background-color: var(--color-3);
+    color: white;
+    transition: 0.4s;
 }
-.tableau td.settings a img{
-    width: 18px;
+.button_table:hover{
+    background-color: var(--color-2);
+    transition: 0.1s;
+}
+
+
+.button_table_2{
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 0 0.2em 0;
+    margin: 0 2em;
+    border-radius: var(--radius-2);
+    background-color: white;
+    color: var(--color-3);
+    transition: 0.4s;
+    border-bottom: 2px solid var(--color-3);
+    font-weight: bold;
+}
+.button_table_2:hover{
+    color: var(--color-2);
+    border-bottom: 2px solid var(--color-2);
+    transition: 0.1s;
+}
+
+
+
+.double_button{
+    width: auto;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1rem auto;
 }

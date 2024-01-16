@@ -28,11 +28,19 @@ include_once '../config/session.php'; #Recuperer les information de mon utilisat
         <!-- Futur jeu -->
         <div id="futur_game_box">
             <div id="in_box">
+
+                <?php $last_partie = getLastPartie($conn) ?>
+
                 <img src="../assets/images/theme/2.jpg" alt="Photo de la partie">
                 <div id="desc">
-                    <h1 id="date">25 Août 2023</h1>
-                    <p id="desc-desc">Nouvelle partie à Cézac PA/Pompe 16 joueurs max, rejoignez-nous !</p>
-                    <a href=""><p id="btn">S'inscrire</p></a>
+                    <h1 id="date"><?= isset($last_partie['date']) ? date('d F Y', strtotime($last_partie['date'])) : 'Pas de partie'; ?></h1>
+                    <p id="desc-desc"><?= isset($last_partie['description']) ? $last_partie['description'] : 'Nous avons pas encore les futures dates, revenez plus tard !'; ?></p>
+
+                    <?php if(isset($last_partie['date'])){?>
+                        <a href="#?id=<?=$last_partie['id']?>"><p id="btn">S'inscrire</p></a>
+                    <?php } else { ?>
+                        <a href=""><p id="btn-gris">Patientez</p></a>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -49,15 +57,16 @@ include_once '../config/session.php'; #Recuperer les information de mon utilisat
                 </p>
                 <div id="chiffre_box">
                     <div>
-                        <h1 class="nbr">>1200</h1>
+                        <?php $membre_amount = getMembreAmount($conn) ?>
+                        <h1 class="nbr"><?=$membre_amount?></h1>
                         <h2 class="desc">Membres</h2>
                     </div>
                     <div>
                         <h1 class="nbr">2</h1>
-                        <h2 class="desc">Parties jouées depuis début 2024</h2>
+                        <h2 class="desc">Parties jouées <br>depuis début 2024</h2>
                     </div>
                     <div>
-                        <h1 class="nbr">33Ha</h1>
+                        <h1 class="nbr">40Ha</h1>
                         <h2 class="desc">De terrains cumulés</h2>
                     </div>
                 </div>
@@ -87,7 +96,7 @@ include_once '../config/session.php'; #Recuperer les information de mon utilisat
                 <div id="descs">
                     <h1>Envie de nous découvrir autrement ?</h1>
                     <br>
-                    <p>Venez sur notre forum ! On parle réplique, technique d'airsoft, on prépare les prochaines parties.</p>
+                    <p>Venez sur notre discord ! On parle réplique, technique d'airsoft, <br>on prépare les prochaines parties, et parfois on ce rejoin juste autour de jeux vidéo !</p>
                 </div>
             </div>
         </div>
