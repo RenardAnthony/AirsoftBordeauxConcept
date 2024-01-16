@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         
         <h1>Supprimer des Parties</h1>
         <p>WARNING : Ne suprimez pas les partie passer. On en a besoin pour les statistique et la compatibilité merci !</p>
-        <form method="post" action="supp_partie.php">
+        <form method="post" action="staff_supp_partie.php">
             <ul>
                 <?php foreach ($parties as $partie) : ?>
                     <li>

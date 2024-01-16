@@ -59,9 +59,9 @@ if (isset($_SESSION['id'])) {
                                 <td>
                                     <select class="input-text-base" name="genre" id="">
                                         <option value="0"></option>
-                                        <option value="1" <?php if($user['genre'] == 1) echo "selected"; ?>>Homme</option>
-                                        <option value="2" <?php if($user['genre'] == 2) echo "selected"; ?>>Femme</option>
-                                        <option value="3" <?php if($user['genre'] == 3) echo "selected"; ?>>Autre</option>
+                                        <option value="homme" <?php if($user['genre'] == 'homme') echo "selected"; ?>>Homme</option>
+                                        <option value="femme" <?php if($user['genre'] == 'femme') echo "selected"; ?>>Femme</option>
+                                        <option value="autre" <?php if($user['genre'] == 'autre') echo "selected"; ?>>Autre</option>
                                     </select>
                                 </td>
                             </tr>

@@ -82,15 +82,6 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     </tr>
 
                     <?php foreach ($users as $user):
-                        
-                        if ($user['genre'] == 1) {
-                            $user['genre'] = "Homme";
-                        } elseif ($user['genre'] == 2){
-                            $user['genre'] = "Femme";
-                        } else {
-                            $user['genre'] = "Autre";
-                        }
-                        
                         ?>
                         <tr>
                             <td><p><?=$user['id']?></p></td>
@@ -110,7 +101,7 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tbody>
             </table>
             <div class="double_button">
-                <a class="button_table_2" href="#">En voir plus</a>
+                <a class="button_table_2" href="staff_userlist.php">En voir plus</a>
             </div>
         </div>
 

@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $prix_location = $_POST['prix_location'];
     $prix_adherant = $_POST['prix_adherant'];
     $prix_bbq = $_POST['prix_bbq'];
+    $repliques_autorisees = isset($_POST['repliques_autorisees']) ? implode(',', $_POST['repliques_autorisees']) : ''; // Récupérez les types de répliques sélectionnés depuis le formulaire
 
     // Exemple de requête SQL pour insérer une nouvelle partie dans la base de données
     if($edit_mode){
@@ -63,6 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         prix_location = :prix_location,
         prix_adherant = :prix_adherant,
         prix_bbq = :prix_bbq,
+        replique_autoriser = :replique_autoriser,
         modified_by = :modified_by,
         modified_at = NOW()
         WHERE id = :partie_id";
@@ -72,8 +74,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':partie_id', $partie_id_to_edit, PDO::PARAM_INT);
     $stmt->bindParam(':date_event', $date_event);
     }else{
-        $sql = "INSERT INTO agenda (titre, description, date, joueur_min, joueur_max, terrain, bbq, location, prix_paf, prix_location, prix_adherant, prix_bbq, created_by, created_at)
-        VALUES (:titre, :description, :date_event, :joueur_min, :joueur_max, :terrain, :bbq, :location, :prix_paf, :prix_location, :prix_adherant, :prix_bbq, :created_by, NOW())";
+        $sql = "INSERT INTO agenda (titre, description, date, joueur_min, joueur_max, replique_autoriser, terrain, bbq, location, prix_paf, prix_location, prix_adherant, prix_bbq, created_by, created_at)
+        VALUES (:titre, :description, :date_event, :joueur_min, :joueur_max, :replique_autoriser, :terrain, :bbq, :location, :prix_paf, :prix_location, :prix_adherant, :prix_bbq, :created_by, NOW())";
 
         $null = null;
         $stmt = $conn->prepare($sql);
@@ -93,6 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':prix_location', $prix_location);
     $stmt->bindParam(':prix_adherant', $prix_adherant);
     $stmt->bindParam(':prix_bbq', $prix_bbq);
+    $stmt->bindParam(':replique_autoriser', $repliques_autorisees);
+
 
     if ($edit_mode) {
         $stmt->bindParam(':modified_by', $_SESSION['id'], PDO::PARAM_INT);
@@ -141,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         ?>
 
-        <form action="creation_partie.php<?= $edit_mode ? '?id=' . $partie_id_to_edit : ''; ?>" method="POST">
+        <form action="staff_creation_partie.php<?= $edit_mode ? '?id=' . $partie_id_to_edit : ''; ?>" method="POST">
             <label for="titre">Titre :</label>
             <input type="text" name="titre" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['titre']) : ''; ?>" required>
 
@@ -162,6 +166,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="" <?= ($edit_mode && $partie_to_edit['terrain'] == '') ? 'selected' : ''; ?>></option>
                 <option value="Cézac" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Cézac') ? 'selected' : ''; ?>>Cézac</option>
                 <option value="Reignac" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Reignac') ? 'selected' : ''; ?>>Reignac</option>
+                <option value="Autre" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Autre') ? 'selected' : ''; ?>>Autre</option>
             </select>
 
             <label for="bbq">BBQ :</label>
@@ -182,6 +187,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="prix_bbq">Prix BBQ :</label>
             <input type="number" name="prix_bbq" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_bbq']) : ''; ?>">
 
+            <label>Répliques autorisées :</label>
+                <?php
+                // Récupérez la liste des types de répliques depuis la base de données
+                $queryTypes = "SELECT DISTINCT type FROM replique";
+                $stmtTypes = $conn->prepare($queryTypes);
+                $stmtTypes->execute();
+                $types = $stmtTypes->fetchAll(PDO::FETCH_ASSOC);
+
+                // Affichez chaque type de réplique comme une case à cocher
+                foreach ($types as $type) {
+                    $checked = ($edit_mode && in_array($type['type'], explode(',', $partie_to_edit['replique_autoriser']))) ? 'checked' : '';
+                    echo '<label><input type="checkbox" name="repliques_autorisees[]" value="' . $type['type'] . '" ' . $checked . '>' . $type['type'] . '</label>';
+                }
+                ?>
+
             <button type="submit"><?= $edit_mode ? 'Modifier' : 'Créer'; ?> la partie</button>
 
         </form>
@@ -193,6 +213,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-    <footer><?php include "../includes/footer.php";?></footer>
+    <footer></footer>
 </body>
 </html>
