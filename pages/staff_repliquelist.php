@@ -124,7 +124,7 @@ foreach ($repliques as $replique) {
             <table>
                 <thead>
                     <tr>
-                        <th colspan="8"><p>Répliques</p></th>
+                        <th colspan="8"><img src="../assets/images/theme/replique.png" alt="Logo répliques"><p>Répliques</p></th>
                     </tr>
                 </thead>
                 <tr class="colone_name">

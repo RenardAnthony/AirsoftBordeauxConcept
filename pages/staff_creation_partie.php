@@ -33,14 +33,17 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])){
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Assure-toi de valider et de sécuriser les données du formulaire avant de les utiliser dans des requêtes SQL
 
+    $type = $_POST['type'];
     $titre = $_POST['titre'];
     $description = $_POST['description'];
     $date_event = $_POST['date'];
     $joueur_min = $_POST['joueur_min'];
     $joueur_max = $_POST['joueur_max'];
     $terrain = $_POST['terrain'];
+    $adresse = $_POST['adresse'];
     $bbq = isset($_POST['bbq']) ? 1 : 0;
     $location = isset($_POST['location']) ? 1 : 0;
+    $freelance = isset($_POST['freelance']) ? 1 : 0;
     $prix_paf = $_POST['prix_paf'];
     $prix_location = $_POST['prix_location'];
     $prix_adherant = $_POST['prix_adherant'];
@@ -50,16 +53,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Exemple de requête SQL pour insérer une nouvelle partie dans la base de données
     if($edit_mode){
 
-        $date_event = $partie_to_edit['date'];
+        /*$date_event = $partie_to_edit['date'];*/
         $sql = "UPDATE agenda SET
+        type = :type,
         titre = :titre,
         description = :description,
         date = :date_event,
         joueur_min = :joueur_min,
         joueur_max = :joueur_max,
         terrain = :terrain,
+        adresse = :adresse,
         bbq = :bbq,
         location = :location,
+        freelance = :freelance,
         prix_paf = :prix_paf,
         prix_location = :prix_location,
         prix_adherant = :prix_adherant,
@@ -74,8 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':partie_id', $partie_id_to_edit, PDO::PARAM_INT);
     $stmt->bindParam(':date_event', $date_event);
     }else{
-        $sql = "INSERT INTO agenda (titre, description, date, joueur_min, joueur_max, replique_autoriser, terrain, bbq, location, prix_paf, prix_location, prix_adherant, prix_bbq, created_by, created_at)
-        VALUES (:titre, :description, :date_event, :joueur_min, :joueur_max, :replique_autoriser, :terrain, :bbq, :location, :prix_paf, :prix_location, :prix_adherant, :prix_bbq, :created_by, NOW())";
+        $sql = "INSERT INTO agenda (type, titre, description, date, joueur_min, joueur_max, replique_autoriser, terrain, adresse; bbq, location, freelance, prix_paf, prix_location, prix_adherant, prix_bbq, created_by, created_at)
+        VALUES (:type, :titre, :description, :date_event, :joueur_min, :joueur_max, :replique_autoriser, :terrain, :adresse, :bbq, :location, :freelanc, :prix_paf, :prix_location, :prix_adherant, :prix_bbq, :created_by, NOW())";
 
         $null = null;
         $stmt = $conn->prepare($sql);
@@ -84,13 +90,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':date_event', $dateFormattedevent);
     }
 
+    $stmt->bindParam(':type', $type);
     $stmt->bindParam(':titre', $titre);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':joueur_min', $joueur_min);
     $stmt->bindParam(':joueur_max', $joueur_max);
     $stmt->bindParam(':terrain', $terrain);
+    $stmt->bindParam(':adresse', $adresse);
     $stmt->bindParam(':bbq', $bbq);
     $stmt->bindParam(':location', $location);
+    $stmt->bindParam(':freelance', $freelance);
     $stmt->bindParam(':prix_paf', $prix_paf);
     $stmt->bindParam(':prix_location', $prix_location);
     $stmt->bindParam(':prix_adherant', $prix_adherant);
@@ -134,81 +143,105 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <main>
 
-    
-        
-    <div>
-        <h1>Game <?php echo $edit_mode ? 'Editor' : 'Creator'; ?></h1>
+
+        <div class="center_partie_creation">
+            <h1>Game <?php echo $edit_mode ? 'Editor' : 'Creator'; ?></h1>
+        </div>
+
+        <div class="spacer_1"></div>
 
         <?php
             if (isset($error_message)) {
                 echo '<p class="error-message">' . $error_message . '</p>';
             }
+
+            echo "<div class=\"spacer_1\"></div>";
         ?>
 
-        <form action="staff_creation_partie.php<?= $edit_mode ? '?id=' . $partie_id_to_edit : ''; ?>" method="POST">
-            <label for="titre">Titre :</label>
-            <input type="text" name="titre" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['titre']) : ''; ?>" required>
+        <div class="center_partie_creation">
+            <form action="staff_creation_partie.php<?= $edit_mode ? '?id=' . $partie_id_to_edit : ''; ?>" method="POST">
+                <div class="table_parte">
+                    <label for="type">Type d'evenement :</label>
+                    <select name="type" class="input_select" required>
+                        <option value="partie" <?= ($edit_mode && $partie_to_edit['type'] == 'partie') ? 'selected' : ''; ?>>Partie</option>
+                        <option value="evenement" <?= ($edit_mode && $partie_to_edit['type'] == 'evenement') ? 'selected' : ''; ?>>Evenement</option>
+                    </select>
 
-            <label for="description">Description :</label>
-            <textarea name="description" rows="4"><?= $edit_mode ? htmlspecialchars($partie_to_edit['description']) : ''; ?></textarea>
+                    <label for="titre">Titre :</label>
+                    <input type="text" name="titre" class="input_texte" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['titre']) : ''; ?>" required>
 
-            <label for="date">Date :</label>
-            <input type="datetime-local" name="date" value="<?= $edit_mode ? date('Y-m-d\TH:i', strtotime($partie_to_edit['date'])) : ''; ?>"required>
+                    <label for="description">Courte description :</label>
+                    <textarea name="description" rows="4" class="input_textarea"><?= $edit_mode ? htmlspecialchars($partie_to_edit['description']) : ''; ?></textarea>
 
-            <label for="joueur_min">Joueurs minimum :</label>
-            <input type="number" name="joueur_min" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['joueur_min']) : ''; ?>">
+                    <label for="date">Date :</label>
+                    <input type="datetime-local" name="date" class="input_select" value="<?= $edit_mode ? date('Y-m-d\TH:i', strtotime($partie_to_edit['date'])) : ''; ?>"required>
 
-            <label for="joueur_max">Joueurs maximum :</label>
-            <input type="number" name="joueur_max" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['joueur_max']) : ''; ?>">
+                    <label for="joueur_min">Joueurs minimum :</label>
+                    <input type="number" name="joueur_min" class="input_chiffre_select" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['joueur_min']) : ''; ?>">
+                    
+                    <label for="joueur_max">Joueurs maximum :</label>
+                    <input type="number" name="joueur_max" class="input_chiffre_select" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['joueur_max']) : ''; ?>">
 
-            <label for="terrain">Terrain :</label>
-            <select name="terrain" required>
-                <option value="" <?= ($edit_mode && $partie_to_edit['terrain'] == '') ? 'selected' : ''; ?>></option>
-                <option value="Cézac" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Cézac') ? 'selected' : ''; ?>>Cézac</option>
-                <option value="Reignac" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Reignac') ? 'selected' : ''; ?>>Reignac</option>
-                <option value="Autre" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Autre') ? 'selected' : ''; ?>>Autre</option>
-            </select>
+                    <label for="terrain">Terrain :</label>
+                    <select name="terrain" class="input_select">
+                        <option value="" <?= ($edit_mode && $partie_to_edit['terrain'] == '') ? 'selected' : ''; ?>></option>
+                        <option value="Cézac" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Cézac') ? 'selected' : ''; ?>>Cézac</option>
+                        <option value="Reignac" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Reignac') ? 'selected' : ''; ?>>Reignac</option>
+                        <option value="Autre" <?= ($edit_mode && $partie_to_edit['terrain'] == 'Autre') ? 'selected' : ''; ?>>Autre</option>
+                    </select>
 
-            <label for="bbq">BBQ :</label>
-            <input type="checkbox" name="bbq" <?= ($edit_mode && $partie_to_edit['bbq'] == 1) ? 'checked' : ''; ?>>
+                    <label for="adresse">Adresse (ou numero du terrain):</label>
+                    <input type="text" name="adresse" class="input_textarea" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['adresse']) : ''; ?>">
+                </div>
+                <div class="table_parte">
+                    <div class="side_by_side">
+                        <label for="bbq">Barbeque : </label>
+                        <input type="checkbox" name="bbq" <?= ($edit_mode && $partie_to_edit['bbq'] == 1) ? 'checked' : ''; ?>>
+                    </div>
 
-            <label for="location">Location de matériel :</label>
-            <input type="checkbox" name="location" <?= ($edit_mode && $partie_to_edit['location'] == 1) ? 'checked' : ''; ?>>
+                    <div class="side_by_side">
+                        <label for="location">Location de matériel :</label>
+                        <input type="checkbox" name="location" <?= ($edit_mode && $partie_to_edit['location'] == 1) ? 'checked' : ''; ?>>
+                    </div>
 
-            <label for="prix_paf">Prix PAF :</label>
-            <input type="number" name="prix_paf" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_paf']) : ''; ?>">
+                    <div class="side_by_side">
+                        <label for="freelance">Freelance : </label>
+                        <input type="checkbox" name="freelance" <?= ($edit_mode && $partie_to_edit['freelance'] == 1) ? 'checked' : ''; ?>>
+                    </div>
+                    
 
-            <label for="prix_location">Prix location :</label>
-            <input type="number" name="prix_location" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_location']) : ''; ?>">
+                    <label for="prix_paf">Prix PAF :</label>
+                    <input type="number" name="prix_paf" class="input_chiffre_select" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_paf']) : ''; ?>">
+                    
+                    <label for="prix_location">Prix location :</label>
+                    <input type="number" name="prix_location" class="input_chiffre_select" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_location']) : ''; ?>">
 
-            <label for="prix_adherant">Prix adhérent :</label>
-            <input type="number" name="prix_adherant" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_adherant']) : ''; ?>">
+                    <label for="prix_adherant">Prix adhérent :</label>
+                    <input type="number" name="prix_adherant" class="input_chiffre_select" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_adherant']) : ''; ?>">
 
-            <label for="prix_bbq">Prix BBQ :</label>
-            <input type="number" name="prix_bbq" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_bbq']) : ''; ?>">
-
-            <label>Répliques autorisées :</label>
-                <?php
-                // Récupérez la liste des types de répliques depuis la base de données
-                $queryTypes = "SELECT DISTINCT type FROM replique";
-                $stmtTypes = $conn->prepare($queryTypes);
-                $stmtTypes->execute();
-                $types = $stmtTypes->fetchAll(PDO::FETCH_ASSOC);
-
-                // Affichez chaque type de réplique comme une case à cocher
-                foreach ($types as $type) {
-                    $checked = ($edit_mode && in_array($type['type'], explode(',', $partie_to_edit['replique_autoriser']))) ? 'checked' : '';
-                    echo '<label><input type="checkbox" name="repliques_autorisees[]" value="' . $type['type'] . '" ' . $checked . '>' . $type['type'] . '</label>';
-                }
-                ?>
-
-            <button type="submit"><?= $edit_mode ? 'Modifier' : 'Créer'; ?> la partie</button>
-
-        </form>
-    </div>
+                    <label for="prix_bbq">Prix BBQ :</label>
+                    <input type="number" name="prix_bbq" class="input_chiffre_select" value="<?= $edit_mode ? htmlspecialchars($partie_to_edit['prix_bbq']) : ''; ?>">
 
 
+                    <label>Répliques autorisées :</label>
+                        <?php
+                        // Récupérez la liste des types de répliques depuis la base de données
+                        $queryTypes = "SELECT DISTINCT type FROM replique";
+                        $stmtTypes = $conn->prepare($queryTypes);
+                        $stmtTypes->execute();
+                        $types = $stmtTypes->fetchAll(PDO::FETCH_ASSOC);
 
+                        // Affichez chaque type de réplique comme une case à cocher
+                        foreach ($types as $type) {
+                            $checked = ($edit_mode && in_array($type['type'], explode(',', $partie_to_edit['replique_autoriser']))) ? 'checked' : '';
+                            echo '<label><input type="checkbox" name="repliques_autorisees[]" value="' . $type['type'] . '" ' . $checked . '>' . $type['type'] . '</label>';
+                        }
+                        ?>
+
+                    <button type="submit" class="button_partie"><?= $edit_mode ? 'Modifier' : 'Créer'; ?> la partie</button>
+                </div>
+            </form>
+        </div>
     </main>
 
 

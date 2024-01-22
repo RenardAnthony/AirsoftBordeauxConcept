@@ -38,6 +38,21 @@ function getSelfUserInfo() {
     return getLoggedInUserInfo($conn);
 }
 
+function getInscritsPartie($eventId) {
+    $conn = connectDB(); // Utilisez la fonction pour établir la connexion à la base de données
+
+    try {
+        // Récupérer la liste des joueurs inscrits à une partie spécifique
+        $stmt = $conn->prepare('SELECT * FROM partie_inscriptions WHERE event_id = ?');
+        $stmt->execute(array($eventId));
+        $inscrits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $inscrits;
+    } catch (PDOException $e) {
+        die("Erreur lors de la récupération des joueurs inscrits : " . $e->getMessage());
+    }
+}
+
 
 
 

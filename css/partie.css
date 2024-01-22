@@ -1,0 +1,401 @@
+main{
+    min-height: 100vh;
+    background-color: var(--color-white);
+}
+#full-size-image{
+    background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0) 80%, var(--color-white) 100%),
+        url('../assets/images/theme/1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 55%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+#full-size-image h1{
+    margin: auto;
+    text-align: center;
+    font-size: 5rem;
+    color: var(--color-white);
+    background-color: rgba(0, 0, 0, 0.74);
+    padding: 1rem 5rem;
+}
+
+
+
+#DateHeureLieu{
+    text-align: center;
+    margin: 3rem auto;
+}
+#DateHeureLieu h1{
+    font-size: 3rem;
+}
+#DateHeureLieu h2{
+    font-size: 2.5rem;
+}
+#DateHeureLieu h3{
+    font-size: 1.5rem;
+}
+
+
+
+.separateur_1{
+    width: 50%;
+    margin: 10rem auto;
+    height: 5px;
+    background-color: var(--color-rougeBordeaux);
+    box-shadow: var(--boxshadow);
+}
+.separateur_2{
+    width: 50%;
+    margin: 5rem auto;
+    height: 5px;
+}
+
+
+
+#triple_carde{
+    width: 70%;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#triple_carde .card{
+    width: 330px;
+    box-shadow: var(--boxshadow);
+    cursor: pointer;
+    transition: 0.7s;
+}
+#triple_carde .card:hover{
+    width: 350px;
+    transition: 0.2s;
+}
+#triple_carde .card a{
+    color: var(--color-rougeBordeaux);
+    transition: 0.7s;
+}
+#triple_carde .card a:hover{
+    color: var(--color-rougeBordeaux);
+    opacity: 90%;
+    transition: 0.2s;
+}
+#triple_carde .card h1{
+    background-color: var(--color-rougeBordeaux);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 1.5em;
+}
+#triple_carde .card p{
+    background-color: white;
+    padding: 5rem 1rem;
+}
+#triple_carde .card h2{
+    background-color: var(--color-rougeBordeaux);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 1.5em;
+}
+#triple_carde .card-off{
+    width: 330px;
+    box-shadow: var(--boxshadow);
+    cursor: pointer;
+    transition: 0.7s;
+}
+#triple_carde .card-off:hover{
+    width: 350px;
+    transition: 0.2s;
+}
+#triple_carde .card-off a{
+    color: var(--color-gray);
+    transition: 0.7s;
+}
+#triple_carde .card-off a:hover{
+    color: var(--color-gray);
+    opacity: 90%;
+    transition: 0.2s;
+}
+#triple_carde .card-off h1{
+    background-color: var(--color-gray);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 1.5em;
+}
+#triple_carde .card-off p{
+    background-color: white;
+    padding: 5rem 1rem;
+}
+#triple_carde .card-off h2{
+    background-color: var(--color-gray);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 1.5em;
+}
+
+
+#map_terrain{
+    width: 70%;
+    margin: auto;
+    height: 500px;
+    border-radius: 5px;
+    box-shadow: var(--boxshadow);
+}
+#map_terrain iframe{
+    border: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+#info_adresse{
+    box-shadow: var(--boxshadow);
+    width: 70%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    cursor: default;
+}
+#info_adresse img{
+    width: 120px;
+    margin: 1rem;
+}
+
+
+
+h1.titre_section{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 5rem;
+}
+
+
+
+#votre_equipement{
+    width: 50%;
+    margin: 3rem auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+#votre_equipement img{
+    width: 120px;
+    margin: auto;
+}
+#votre_equipement .card{
+    background-color: white;
+    color: var(--color-black);
+    box-shadow: var(--boxshadow);
+    border-radius: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: 0.7s;
+}
+#votre_equipement .hover_vert:hover{
+    background-color: rgb(127, 194, 136);
+    color: white;
+    transition: 0.2s;
+}
+#votre_equipement .hover_rouge:hover{
+    background-color: rgb(194, 127, 127);
+    color: white;
+    transition: 0.2s;
+}
+#votre_equipement .card h1{
+    margin: 2rem auto;
+}
+#votre_equipement .card ul{
+    text-align: left;
+    margin: 2rem 0;
+}
+p.description_regles{
+    text-align: center;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+.description_regles a{
+    color: var(--color-rougeBordeaux);
+    transition: 0.7s;
+}
+.description_regles a:hover{
+    color: var(--color-rougeBordeaux);
+    opacity: 90%;
+    transition: 0.2s;
+}
+
+
+
+.limite_puissance{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+.limite_puissance img{
+    width: 50%;
+}
+em{
+    font-style: normal;
+    color: var(--color-rougeBordeaux);
+    font-weight: bold;
+}
+
+.titre_sous_section{
+    text-align: center;
+    font-size: 2rem;
+    margin: 10rem auto 1rem auto;
+}
+.location_pack{
+    padding: 1rem;
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    cursor: default;
+}
+.location_pack img{
+    box-shadow: var(--boxshadow);
+    height: 400px;
+}
+
+
+
+.player_liste{
+    width: 70%;
+    margin: auto;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+.player_liste h2{
+    font-weight: normal;
+}
+.player_liste .box{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2rem ;
+}
+.player_liste .box img{
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-50);
+    margin-right: 1rem ;
+    object-fit: cover;
+}
+.player_liste .box a{
+    display: flex;
+    border-radius: 50px;
+    flex-direction: row;
+    align-items: center;
+    width: 250px;
+    padding: 0.25rem;
+    margin: 0.5rem;
+    background-color: white;
+    box-shadow: var(--boxshadow);
+    border: 2px solid transparent;
+    transition: 0.7s;
+}
+.player_liste .box a.membre{
+    border: 2px solid var(--color-blue);
+}
+.player_liste .box a:hover{
+    background-color: var(--color-gray);
+    transition: 0.2s;
+}
+
+
+
+.button_inscription{
+    width: 200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 8rem;
+}
+.button_inscription a{
+    margin: 0.5rem;
+}
+.button_inscription .inscription{
+    background-color: var(--color-green);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+.button_inscription.friend_inscription{
+    background-color: var(--color-gray);
+    color: var(--color-black);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+
+
+
+/*Page inscription_partie.php*/
+.page_marge{
+    padding: 10rem;
+}
+.inscription_partie{
+    background-color: white;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: var(--boxshadow);
+}
+.inscription_partie fieldset{
+    border: 0;
+}
+.inscription_partie .myname{
+    background-color: #dfdfdf;
+    border-radius: 5px;
+    padding: 0.5rem;
+    width: 150px;
+    text-align: center;
+    border: 0;
+    margin: 1rem auto 2rem auto;
+}
+.inscription_partie .align_left{
+    text-align: left;
+    width: 70%;
+    margin: 2rem auto;
+}
+.inscription_partie input[type="submit"]{
+    background-color: var(--color-green);
+    border: 0;
+    border-radius: 5px;
+    width: 100px;
+    color: white;
+    margin: auto;
+    padding: 0.5rem;
+    cursor: pointer;
+}

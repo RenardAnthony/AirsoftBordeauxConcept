@@ -63,7 +63,7 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <table>
                 <thead>
                     <tr>
-                        <th colspan="11"><p>Utilisateurs</p></th>
+                        <th colspan="11"><img src="../assets/images/theme/membre.png" alt="Logo membre"><p>Utilisateurs</p></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,11 +112,10 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <table>
                 <thead>
                     <tr>
-                        <th colspan="8"><p>Parties d'airsoft</p></th>
+                        <th colspan="8"><img src="../assets/images/theme/agenda.png" alt="Logo agenda"><p>Parties d'airsoft</p></th>
                     </tr>
                 </thead>
                 <tr class="colone_name">
-                    <td><p>ID</p></td>
                     <td><p>Titre</p></td>
                     <td><p>Description</p></td>
                     <td><p>Date</p></td>
@@ -128,7 +127,6 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 <?php foreach($agendas as $agenda): ?>
                     <tr>
-                        <td><p><?=$agenda['id']?></p></td>
                         <td><p><?=$agenda['titre']?></p></td>
                         <td><p><?=$agenda['description']?></p></td>
                         <td><p><?=$agenda['date']?></p></td>
@@ -152,7 +150,7 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <table>
             <thead>
                 <tr>
-                    <th colspan="8"><p>Répliques</p></th>
+                    <th colspan="8"><img src="../assets/images/theme/replique.png" alt="Logo répliques"><p>Répliques</p></th>
                 </tr>
             </thead>
             <tr class="colone_name">
@@ -189,7 +187,7 @@ $repliques = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
         </table>
         <div class="double_button">
-            <a class="button_table_2" href="#">Afficher plus</a>
+            <a class="button_table_2" href="staff_repliquelist.php">Afficher plus</a>
         </div>
     </div>
 

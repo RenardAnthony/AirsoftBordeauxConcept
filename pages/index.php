@@ -26,6 +26,7 @@ include_once '../config/session.php'; #Recuperer les information de mon utilisat
 
     <main>
         <!-- Futur jeu -->
+
         <div id="futur_game_box">
             <div id="in_box">
 
@@ -37,7 +38,7 @@ include_once '../config/session.php'; #Recuperer les information de mon utilisat
                     <p id="desc-desc"><?= isset($last_partie['description']) ? $last_partie['description'] : 'Nous avons pas encore les futures dates, revenez plus tard !'; ?></p>
 
                     <?php if(isset($last_partie['date'])){?>
-                        <a href="#?id=<?=$last_partie['id']?>"><p id="btn">S'inscrire</p></a>
+                        <a href="partie.php?id=<?=$last_partie['id']?>"><p id="btn">S'inscrire</p></a>
                     <?php } else { ?>
                         <a href=""><p id="btn-gris">Patientez</p></a>
                     <?php } ?>

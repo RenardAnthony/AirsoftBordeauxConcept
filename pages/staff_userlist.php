@@ -108,7 +108,7 @@ foreach ($users as $user) {
             <table>
                 <thead>
                     <tr>
-                        <th colspan="11"><p>Utilisateurs</p></th>
+                        <th colspan="11"><img src="../assets/images/theme/membre.png" alt="Logo membre"><p>Utilisateurs</p></th>
                     </tr>
                 </thead>
                 <tbody>

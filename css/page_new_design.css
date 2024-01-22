@@ -1,0 +1,28 @@
+
+main{
+    min-height: 70vh;
+    width: 1400px;
+    margin: 5rem auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.element{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: 24px;
+    box-shadow: var(--boxshadow);
+    justify-content: center;
+}
+.color_palete{
+    width: 200px;
+    height: 28px;
+    margin: 0.1rem auto;
+}
+.color_palete p{
+    margin: 0.2rem auto auto auto;
+    text-align: center;
+}

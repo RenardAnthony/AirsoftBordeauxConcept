@@ -92,12 +92,51 @@ if(isset($_GET['id'])){
                 <?php } ?>
             </div>
             <div id="role">
-                <!-- Affiche le badge de rang de l'utilisateur et une liste de badges supplémentaires -->
-                <img id="badge" src="../assets/images/badges/t3.png" alt="" title="► 3 ans d'ancienneté !">
+                <?php
+                // Récupère les badges associés à l'utilisateur
+                $badgeIds = (!empty($userinfo['badges'])) ? explode(',', $userinfo['badges']) : [];
+
+                // Récupère le premier badge associé à l'utilisateur
+                $firstBadgeId = (!empty($badgeIds)) ? reset($badgeIds) : null;
+                
+                if ($firstBadgeId !== null) {
+                    $queryFirstBadge = "SELECT * FROM badges WHERE id = :badge_id";
+                    $stmtFirstBadge = $conn->prepare($queryFirstBadge);
+                    $stmtFirstBadge->bindParam(':badge_id', $firstBadgeId, PDO::PARAM_INT);
+                    $stmtFirstBadge->execute();
+                    ?>
+                    <!-- Affiche le badge de rang de l'utilisateur -->
+                    <?php if ($firstBadge = $stmtFirstBadge->fetch(PDO::FETCH_ASSOC)) { ?>
+                        <a href="<?= $firstBadge['link'] ?>"><img id="badge" src="<?= $firstBadge['img'] ?>" alt="" title="<?= $firstBadge['nom'] ?>"></a>
+                    <?php } ?>
+                <?php } ?>
+
+                <!-- Affiche une liste de badges supplémentaires -->
                 <div id="liste_badge">
-                    <img class="badge_petit" src="../assets/images/badges/t2.png" alt="" title="► 2eme année de services">
-                    <img class="badge_petit" src="../assets/images/badges/m2.png" alt="" title="► Les phenix ca me connais !">
-                    <img class="badge_petit" src="../assets/images/badges/p1.png" alt="" title="► Premier craquage de nuque">
+                    <?php
+                    $counter = 0; // Variable pour suivre le nombre de résultats affichés
+                    foreach ($badgeIds as $key => $badgeId) {
+                        // Ignorer le premier badge car il est déjà affiché
+                        if ($key === 0) {
+                            continue;
+                        }
+                        // Effectue une requête pour obtenir les détails du badge
+                        $queryBadge = "SELECT * FROM badges WHERE id = :badge_id";
+                        $stmtBadge = $conn->prepare($queryBadge);
+                        $stmtBadge->bindParam(':badge_id', $badgeId, PDO::PARAM_INT);
+                        $stmtBadge->execute();
+                        // Vérifie si la requête a réussi et si le badge existe
+                        while ($badge = $stmtBadge->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                            <a href="<?= $badge['link'] ?>"><img class="badge_petit" src="<?= $badge['img'] ?>" alt="" title="<?= $badge['nom'] ?>"></a>
+                            <?php
+                            $counter++; // Incrémenter le compteur après l'affichage d'un résultat
+                        }
+                        if ($counter >= 3) {
+                            break; // Sortir de la boucle après avoir affiché 2 résultats
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
