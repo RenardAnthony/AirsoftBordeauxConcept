@@ -25,6 +25,7 @@ function getParties($conn) {
 
 function deletePartie($conn, $partie_id) {
     // Supprimer une partie en fonction de son ID
+    deletePartieInscriptions($conn, $partie_id); // Supprimer les inscriptions à l'événement
     $sql = "DELETE FROM agenda WHERE id = :partie_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':partie_id', $partie_id, PDO::PARAM_INT);

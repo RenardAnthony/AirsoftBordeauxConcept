@@ -83,5 +83,67 @@ function getMembreAmount($conn) {
 }
 
 
+function getProchainesParties($conn) {
+    $stmt_agenda = $conn->prepare("SELECT * FROM agenda WHERE date > NOW() ORDER BY date ASC LIMIT 5");
+    $stmt_agenda->execute();
+    $prochainesParties = $stmt_agenda->fetchAll(PDO::FETCH_ASSOC);
+
+    return $prochainesParties;
+}
+
+// Fonction pour obtenir le nombre total de participants
+function getTotalParticipants($conn, $eventId) {
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM partie_inscriptions WHERE event_id = ?");
+    $stmt->execute([$eventId]);
+    return $stmt->fetchColumn();
+}
+
+// Fonction pour obtenir 4 photos de profil au hasard
+function getRandomAvatars($conn, $eventId, $limit) {
+    $stmt = $conn->prepare("SELECT DISTINCT u.avatar 
+                           FROM partie_inscriptions pi
+                           JOIN users u ON pi.user_id = u.id
+                           WHERE pi.event_id = :eventId
+                           ORDER BY RAND()
+                           LIMIT :limit");
+
+    $stmt->bindParam(':eventId', $eventId, PDO::PARAM_INT);
+    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
+
+//Verifier si le joueur connecter est inscrit a la partie en quesiton
+function isUserRegistered($conn, $userId, $eventId) {
+    $sql = "SELECT COUNT(*) FROM partie_inscriptions WHERE user_id = :user_id AND event_id = :event_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+
+    return ($count > 0);
+}
+
+//Je me suprime de la partie ou je suis inscrit
+function removeInscription($conn, $userId, $eventId) {
+    $sql = "DELETE FROM partie_inscriptions WHERE user_id = :user_id AND event_id = :event_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->bindParam(':event_id', $eventId, PDO::PARAM_INT);
+    $stmt->execute();
+}
+
+function deletePartieInscriptions($conn, $partie_id) {
+    // Supprimer les inscriptions à l'événement en fonction de l'ID de la partie
+    $sql = "DELETE FROM partie_inscriptions WHERE event_id = :event_id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':event_id', $partie_id, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+
+
+
 
 ?>

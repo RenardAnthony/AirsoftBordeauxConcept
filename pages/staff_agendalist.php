@@ -20,10 +20,6 @@ $countTotal = count($agendas);
 $countParties = 0;
 $countEvenements = 0;
 
-
-
-$joueur_inscrit = 10 //Faire une variable dynamique
-
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +91,9 @@ $joueur_inscrit = 10 //Faire une variable dynamique
                     <td><p>Edit</p></td>
                     <td><p>Voir plus</p></td>
                 </tr>
-                <?php foreach($agendas as $agenda): ?>
+                <?php foreach($agendas as $agenda):
+                    $inscrits = getInscritsPartie($agenda["id"]);
+                    $joueur_inscrit = count($inscrits); ?>
                     <tr>
                         <td><p><?=$agenda["id"]?></p></td>
                         <td><p><?=$agenda["type"]?></p></td>

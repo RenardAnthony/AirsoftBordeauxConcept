@@ -80,8 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':partie_id', $partie_id_to_edit, PDO::PARAM_INT);
     $stmt->bindParam(':date_event', $date_event);
     }else{
-        $sql = "INSERT INTO agenda (type, titre, description, date, joueur_min, joueur_max, replique_autoriser, terrain, adresse; bbq, location, freelance, prix_paf, prix_location, prix_adherant, prix_bbq, created_by, created_at)
-        VALUES (:type, :titre, :description, :date_event, :joueur_min, :joueur_max, :replique_autoriser, :terrain, :adresse, :bbq, :location, :freelanc, :prix_paf, :prix_location, :prix_adherant, :prix_bbq, :created_by, NOW())";
+        $sql = "INSERT INTO agenda (type, titre, description, date, joueur_min, joueur_max, replique_autoriser, terrain, adresse, bbq, location, freelance, prix_paf, prix_location, prix_adherant, prix_bbq, created_by, created_at)
+        VALUES (:type, :titre, :description, :date_event, :joueur_min, :joueur_max, :replique_autoriser, :terrain, :adresse, :bbq, :location, :freelance, :prix_paf, :prix_location, :prix_adherant, :prix_bbq, :created_by, NOW())";
+
 
         $null = null;
         $stmt = $conn->prepare($sql);
@@ -104,7 +105,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':prix_location', $prix_location);
     $stmt->bindParam(':prix_adherant', $prix_adherant);
     $stmt->bindParam(':prix_bbq', $prix_bbq);
-    $stmt->bindParam(':replique_autoriser', $repliques_autorisees);
+    $stmt->bindParam(':replique_autoriser', $repliques_autorisees, PDO::PARAM_STR);
+
+
 
 
     if ($edit_mode) {

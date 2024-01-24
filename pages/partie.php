@@ -265,7 +265,7 @@ $inscrits = getInscritsPartie($get_eventId);
         <div class="button_inscription">
             <a href="inscription_partie.php?id=<?=$evenent['id']?>" class="inscription">S'inscrire</a>
             <a href="inscription_partie.php?id=<?=$evenent['id']?>&friend=true" class="friend_inscription">Inscrire un ami</a>
-            <a href="" class="petitinscriptiuon">Je me deinscrit</a>
+            <a href="deinscription_partie.php?id=<?=$evenent['id']?>" class="petitinscriptiuon">Je me désinscris</a>
         </div>
 
     </main>
